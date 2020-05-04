@@ -2,18 +2,35 @@ import React from 'react'
 
 import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native'
 
+import {NavbarContext} from '../context/NavbarContext'
+
+
+let pressedColor = '#C7701F';
+let unPressedColor = '#FC8B23';
+
 const Navbar = () => {
+
+    const [selectedTab, setSelectedTab] = React.useContext(NavbarContext)
+
+
     return (
         <View style={styles.ButtonStyleView}>
-            <TouchableOpacity style={styles.TButton1}>
+            <TouchableOpacity  
+                style={selectedTab===1? styles.TButton1: styles.TButton2 }
+                onPress={() => setSelectedTab(1)}
+                >
                 <Text style={styles.Button1Text}> LINKED </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.TButton2}>
+            <TouchableOpacity 
+                style={selectedTab===1? styles.TButton2: styles.TButton1 } 
+                onPress={() => setSelectedTab(2)}
+                >
                 <Text style={styles.Button2Text}> REQUESTS </Text>
             </TouchableOpacity>
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     ButtonStyleView:{
@@ -25,7 +42,7 @@ const styles = StyleSheet.create({
     },
     TButton1:{
         flex: 1,
-        backgroundColor: '#C7701F',
+        backgroundColor: pressedColor,
         justifyContent: "center",
         borderBottomWidth: 2
         
@@ -37,7 +54,7 @@ const styles = StyleSheet.create({
     },
     TButton2:{
         flex: 1,
-        backgroundColor: '#FC8B23',
+        backgroundColor: unPressedColor,
         justifyContent: "center",
         borderBottomWidth: 2
     },

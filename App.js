@@ -18,13 +18,33 @@ import {
 
 import Header from './components/Header'
 import Navbar from './components/Navbar'
+import Main from './components/Main'
+
+import {NavbarProvider} from './context/NavbarContext'
 
 
 const App = () => {
+
+  // const value = React.useContext(NavbarContext)
+  // const selectedTab = 1
+  // console.log(value)
+  // console.log(React.useContext(NavbarContext))
+
   return (
     <View style={styles.AppView}>
       <Header />
-      <Navbar />
+      <NavbarProvider>
+          <Navbar />
+          <Main />
+      </NavbarProvider>
+      
+
+      {/* {selectedTab?
+            <Linked />
+            :
+            <Requests />
+    } */}
+      
     </View>
     
   )
