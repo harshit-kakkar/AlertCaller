@@ -1,6 +1,7 @@
 package com.alertcaller;
 
 import com.facebook.react.ReactActivity;
+import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +13,9 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "AlertCaller";
   }
+  @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        RNImmediatePhoneCallPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    } 
 }

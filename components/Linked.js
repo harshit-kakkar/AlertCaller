@@ -1,6 +1,7 @@
 import React from 'react'
 
-import {View, Text, StyleSheet, Alert} from 'react-native'
+import {View, Text, StyleSheet, Alert, FlatList, Button, TouchableOpacity} from 'react-native'
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import axios from 'axios'
 
 
@@ -9,11 +10,22 @@ const Linked = () => {
 
     let phone = '9027326034'
 
-    let url = 'http://192.168.29.37:9183/linked?phone=' + phone
+
+    const [linkedContacts, setLinkedContacts] = React.useState([])
+
+
+    let url = 'http://192.168.43.37:9183/linked?phone=' + phone
     React.useEffect(() => {
         axios.get(url)
         .then(response => {
-            console.log(response.data)
+            if(response.data.length ===0){
+                setLinkedContacts([])
+            }
+            else{
+                setLinkedContacts(response.data[0].linked)
+            }
+            
+            
         })
         .catch(error => {
             // Alert.alert('error', 'An error occured', [{text: Ok}])
@@ -23,10 +35,63 @@ const Linked = () => {
 
     return (
         <View >
+            {linkedContacts.length===0?
             <Text >Linked contacts will be displayed here.</Text>
+            :
+                
+            <FlatList 
+                data={linkedContacts}
+                renderItem={
+                    ({item}) => <View style={styles.ListItem}>
+                                    <Text style={styles.LinkedText}>{item}</Text>
+                                    {/* <Button 
+                                        style={styles.CallButton}
+                                        title="Alert call">
+                                        
+                                        
+                                    </Button> */}
+                                    <TouchableOpacity
+                                        style={styles.CallButton}
+                                        onPress={() => RNImmediatePhoneCall.immediatePhoneCall(item)}
+                                    >
+                                        <Text style={styles.CallButtonText}>Alert Call</Text>
+                                    </TouchableOpacity>
+                                </View> 
+                }
+                keyExtractor={(item, index) => index.toString()}
+            />
+            
+        }
 
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    
+    ListItem: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        margin: 20,
+        padding: 15,
+        paddingBottom: 20,
+        borderBottomWidth: 2
+    },
+    LinkedText: {
+        fontSize: 20
+    },
+    CallButton: {
+        borderWidth:1,
+        padding: 10,
+        backgroundColor: "green",
+        marginTop: -8
+        
+    },
+    CallButtonText: {
+        color: "white"
+    }
+
+})
 
 export default Linked
