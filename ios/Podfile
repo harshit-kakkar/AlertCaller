@@ -79,6 +79,8 @@ target 'AlertCaller' do
 
   pod 'react-native-immediate-phone-call', :path => '../node_modules/react-native-immediate-phone-call'
 
+  pod 'RCTSelectContact', :path => '../node_modules/react-native-select-contact'
+
   target 'AlertCallerTests' do
     inherit! :complete
     # Pods for testing

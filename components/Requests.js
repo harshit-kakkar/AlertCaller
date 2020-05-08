@@ -2,11 +2,13 @@ import React from 'react'
 
 import {View, Text, StyleSheet} from 'react-native'
 
+import AddContacts from './AddContacts'
+
 
 const Requests = () => {
     return (
         <View >
-            <Text >All your requests will be displayed here.</Text>
+            <AddContacts />
         </View>
     )
 }

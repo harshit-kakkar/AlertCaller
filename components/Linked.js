@@ -4,8 +4,6 @@ import {View, Text, StyleSheet, Alert, FlatList, Button, TouchableOpacity} from 
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import axios from 'axios'
 
-
-
 const Linked = () => {
 
     let phone = '9027326034'
@@ -14,7 +12,7 @@ const Linked = () => {
     const [linkedContacts, setLinkedContacts] = React.useState([])
 
 
-    let url = 'http://192.168.43.37:9183/linked?phone=' + phone
+    let url = 'http://192.168.29.37:9183/linked?phone=' + phone
     React.useEffect(() => {
         axios.get(url)
         .then(response => {
@@ -44,14 +42,12 @@ const Linked = () => {
                 renderItem={
                     ({item}) => <View style={styles.ListItem}>
                                     <Text style={styles.LinkedText}>{item}</Text>
-                                    {/* <Button 
-                                        style={styles.CallButton}
-                                        title="Alert call">
-                                        
-                                        
-                                    </Button> */}
+                                    
                                     <TouchableOpacity
                                         style={styles.CallButton}
+
+                                            // TODO: onPress will also signal the server about the person being called. 
+                                            
                                         onPress={() => RNImmediatePhoneCall.immediatePhoneCall(item)}
                                     >
                                         <Text style={styles.CallButtonText}>Alert Call</Text>
