@@ -2,6 +2,7 @@ package com.alertcaller;
 
 import com.facebook.react.ReactActivity;
 import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
+import com.joshuapinter.RNUnifiedContacts.RNUnifiedContactsPackage;
 
 public class MainActivity extends ReactActivity {
 
