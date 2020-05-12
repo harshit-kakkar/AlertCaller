@@ -3,7 +3,6 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import SendRequest from './SendRequest'
 import Contacts from 'react-native-unified-contacts';
-import axios from 'axios';
 
 
 
@@ -13,7 +12,7 @@ import axios from 'axios';
 
 
 
-const AddContacts = () => {
+const AddContacts = (props) => {
     
     const [contact, setContact] = React.useState('')
     const [reqSent, setReqSent] = React.useState(false)
@@ -36,7 +35,6 @@ const AddContacts = () => {
                     console.error(error);
                     }
                     else {
-                    console.log(contact);
                     Alert.alert(
                         "Send Request ?",
                         "You are sending request to "+ contact.fullName,
@@ -66,8 +64,7 @@ const AddContacts = () => {
     let selectedPhoneCorrected = ''
 
     function CorrectNumber(selectedPhone){
-        console.log("reached send req 1")
-        console.log(selectedPhone)
+        
         selectedPhoneCorrected = ''
         for (let i=0;i<selectedPhone.length;i++){
             if(selectedPhone[i]== '(' || selectedPhone[i]==')' || selectedPhone[i]=='-' || selectedPhone[i]==' '){
@@ -78,7 +75,6 @@ const AddContacts = () => {
             }
             
         }
-        console.log(selectedPhoneCorrected)
         setContact(selectedPhoneCorrected)
         
     }
@@ -95,7 +91,11 @@ const AddContacts = () => {
                 
             </TouchableOpacity>
 
-            <SendRequest contact={contact} setReqSent={setReqSent} />
+            <SendRequest 
+                contact={contact} 
+                setReqSent={setReqSent}
+                setSendReq2={props.setSendReq2}
+            />
 
             
             

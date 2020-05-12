@@ -2,6 +2,8 @@ import React from 'react'
 
 import {View, Text, StyleSheet} from 'react-native'
 import axios from 'axios';
+import {SendRequestContext} from '../context/SendRequestContext'
+
 
 const SendRequest = (props) => {
     let contact = props.contact
@@ -9,6 +11,8 @@ const SendRequest = (props) => {
     let url = 'http://192.168.29.37:9183/request/sent'
 
     const [reqPosition, setReqPosition] = React.useState('Sending request ...')
+    const [sendReq, setSendReq] = React.useContext(SendRequestContext)
+
 
     React.useEffect(() => {
         if(props.contact == ''){
@@ -21,7 +25,7 @@ const SendRequest = (props) => {
             .then(response => {
                 props.setReqSent(true)
                 setReqPosition('Request sent successfully')
-                console.log(response)
+                setSendReq(1)
             })
             .catch(err => {
                 console.log(err)

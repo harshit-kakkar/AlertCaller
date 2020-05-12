@@ -25,10 +25,6 @@ import {NavbarProvider} from './context/NavbarContext'
 
 const App = () => {
 
-  // const value = React.useContext(NavbarContext)
-  // const selectedTab = 1
-  // console.log(value)
-  // console.log(React.useContext(NavbarContext))
 
   return (
     <View style={styles.AppView}>
@@ -37,14 +33,7 @@ const App = () => {
           <Navbar />
           <Main />
       </NavbarProvider>
-      
 
-      {/* {selectedTab?
-            <Linked />
-            :
-            <Requests />
-    } */}
-      
     </View>
     
   )
