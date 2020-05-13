@@ -40,7 +40,7 @@ const Sent = (props) => {
 
     return (
         <View>
-            <Text>All sent requests : </Text>
+            <Text style={styles.sentHeaderText}>All sent requests : </Text>
             <FlatList 
 
                 data={sent}
@@ -80,6 +80,10 @@ const Sent = (props) => {
 }
 
 const styles = StyleSheet.create({
+    sentHeaderText: {
+        borderTopWidth: 2,
+        padding: 6
+    },
     sentListContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
