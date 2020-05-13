@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Alert} from 'react-native'
 import Axios from 'axios'
 import {SendRequestContext} from '../context/SendRequestContext'
 
@@ -9,6 +9,7 @@ const Sent = (props) => {
 
     const [sent, setSent] = React.useState([])
     const [sendReq, setSendReq] = React.useContext(SendRequestContext)
+    const [contactRemove, setContactRemove] = React.useState('')
 
     let phone = '9027326034'
     let url = 'http://192.168.29.37:9183/request/sent?phone=' + phone
@@ -22,6 +23,21 @@ const Sent = (props) => {
             console.log(err)
         })
     }, [sendReq])
+
+    let urlRemove = 'http://192.168.29.37:9183/request/sent/remove'
+    React.useEffect(() => {
+        Axios.put(urlRemove, {
+            phone: phone,
+            sentPhone: contactRemove
+        })
+        .then(response => {
+            setSendReq(1)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [contactRemove])
+
     return (
         <View>
             <Text>All sent requests : </Text>
@@ -30,9 +46,27 @@ const Sent = (props) => {
                 data={sent}
                 renderItem={
                     ({item}) => <View style={styles.sentListContainer}>
-                                    <Text style={styles.sentListText}>{item}{props.sendReq2}</Text>
+                                    <Text style={styles.sentListText}>{item}</Text>
                                     <TouchableOpacity 
                                         style={styles.xButton}
+                                        onPress={() =>
+                                            Alert.alert(
+                                                "Remove sent request ?",
+                                                "You are removing sent request to "+ item,
+                                                [
+                                                    {
+                                                        text: 'Cancel',
+                                                        onPress: () => console.log("Cancelled Remove Operation")
+                                                    },
+                                                    {
+                                                        text: 'Remove',
+                                                        onPress: () => setContactRemove(item)
+                                                        
+                                                    }
+                        
+                                                ]
+                                            ) 
+                                            }
                                         >
                                         <Text style={styles.xButtonText}>x</Text>
                                     </TouchableOpacity>

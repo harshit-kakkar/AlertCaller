@@ -22,7 +22,7 @@ const AddContacts = (props) => {
         setTimeout(function () {
             setContact('')
             setReqSent(false)
-        }, 5000);
+        }, 3500);
     }
 
 

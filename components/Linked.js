@@ -26,7 +26,6 @@ const Linked = () => {
             
         })
         .catch(error => {
-            // Alert.alert('error', 'An error occured', [{text: Ok}])
             console.log(error.message)
         })
     }, [])
