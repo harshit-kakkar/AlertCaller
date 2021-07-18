@@ -81,6 +81,8 @@ target 'AlertCaller' do
 
   pod 'RCTSelectContact', :path => '../node_modules/react-native-select-contact'
 
+  pod 'RCTSystemSetting', :path => '../node_modules/react-native-system-setting'
+
   target 'AlertCallerTests' do
     inherit! :complete
     # Pods for testing

@@ -12,7 +12,7 @@ const Linked = () => {
     const [linkedContacts, setLinkedContacts] = React.useState([])
 
 
-    let url = 'http://192.168.29.37:9183/linked?phone=' + phone
+    let url = 'http://49.36.216.109:9183/linked?phone=' + phone
     React.useEffect(() => {
         axios.get(url)
         .then(response => {
@@ -22,7 +22,6 @@ const Linked = () => {
             else{
                 setLinkedContacts(response.data[0].linked)
             }
-            
             
         })
         .catch(error => {

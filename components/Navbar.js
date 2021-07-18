@@ -1,9 +1,12 @@
 import React from 'react'
 
-import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, Button, TouchableOpacity, Alert} from 'react-native'
 
 import {NavbarContext} from '../context/NavbarContext'
 
+import Sound from "react-native-sound"
+import SystemSetting from 'react-native-system-setting'
+Sound.setCategory('Playback');
 
 let pressedColor = '#C7701F';
 let unPressedColor = '#FC8B23';
@@ -11,6 +14,28 @@ let unPressedColor = '#FC8B23';
 const Navbar = () => {
 
     const [selectedTab, setSelectedTab] = React.useContext(NavbarContext)
+    function playSound(){
+        Sound.setCategory('Playback');
+        const whoosh  = new Sound('notification.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+             console.log('failed to load the sound', error);
+             }else{
+                SystemSetting.setVolume(1)
+                SystemSetting.getVolume().then(a => console.log(a)).catch(err => console.log(err))
+                whoosh.play((success) => {
+                    if (success) {
+                        console.log("Sound played successfully")
+                        
+                    } else {
+                        console.log('playback failed due to audio decoding errors');
+                        //reset the player to its uninitialized state (android only)
+                        whoosh.reset();
+                  }})
+             }
+            })
+        console.log("Sound is played ...")
+        
+    }
 
 
     return (

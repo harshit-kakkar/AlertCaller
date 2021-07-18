@@ -12,7 +12,7 @@ const Sent = (props) => {
     const [contactRemove, setContactRemove] = React.useState('')
 
     let phone = '9027326034'
-    let url = 'http://192.168.29.37:9183/request/sent?phone=' + phone
+    let url = 'http://192.168.43.37:9183/request/sent?phone=' + phone
     React.useEffect(() => {
         Axios.get(url)
         .then(response => {
@@ -24,7 +24,7 @@ const Sent = (props) => {
         })
     }, [sendReq])
 
-    let urlRemove = 'http://192.168.29.37:9183/request/sent/remove'
+    let urlRemove = 'http://192.168.43.37:9183/request/sent/remove'
     React.useEffect(() => {
         Axios.put(urlRemove, {
             phone: phone,

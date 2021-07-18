@@ -5,15 +5,13 @@ import Axios from 'axios'
 
 
 
-
-
 const Recieved = () => {
 
     const [recievedReq, setRecievedReq] = React.useState([])
 
     let phone = '8860490727'
 
-    let url = 'http://192.168.29.37:9183/request/recieved?phone=' + phone
+    let url = 'http://192.168.43.37:9183/request/recieved?phone=' + phone
     React.useEffect(() => {
         Axios.get(url)
         .then(response => {
@@ -23,7 +21,16 @@ const Recieved = () => {
             console.log(err)
         })
     }, [])
-    
+
+
+    // let ignoreUrl = 'http://192.168.43.37:9183/recieved/remove'
+    // React.useEffect(() => {
+    //     Axios.put(ignoreButton, {
+    //         phone: phone,
+            
+    //     })
+    // })
+
 
 
     return (
@@ -42,6 +49,7 @@ const Recieved = () => {
                             >
                                 <Text style={styles.acceptButtonText}>ACCEPT</Text>
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 style={styles.ignoreButton}
                             >
